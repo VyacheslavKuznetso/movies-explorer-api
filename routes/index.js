@@ -3,13 +3,13 @@ const { celebrate } = require('celebrate');
 const { createUser, login } = require('../controllers/user');
 const { createUserValidation, loginUserValidation } = require('../validators/user-validation');
 const NotFoundError = require('../errors/not-found-err');
-// const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 
 router.post('/signup', celebrate(createUserValidation), createUser); // Валидация приходящих на сервер данных //
 router.post('/signin', celebrate(loginUserValidation), login); // Валидация приходящих на сервер данных //
 
 // Авторизация //
-// app.use(auth);
+router.use(auth);
 
 // Роуты, которым авторизация нужна //
 router.use('/movies', require('./movies'));

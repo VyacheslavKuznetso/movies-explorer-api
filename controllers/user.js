@@ -88,10 +88,12 @@ module.exports.updateUser = (req, res, next) => { // Обновить инфор
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      return res.status(200).send({ data: user });
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
+      } else if (err.name === 'ValidationError') {
         next(new BadRequestError('Некорректный формат ID пользователя'));
       } else {
         next(err);

@@ -6,12 +6,12 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const { PORT, DB_URL } = process.env;
+const { NODE_ENV, PORT, DB_URL } = process.env;
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const { limiter } = require('./express-rate-limit/limiter');
+const { limiter } = require('./express-rate-limit/limiter');
 
-mongoose.connect(DB_URL);
+mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/bitfilmsdb');
 
 const app = express();
 app.use(helmet());
@@ -27,7 +27,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// app.use(limiter); // подключаем rate-limiter //
+app.use(limiter); // подключаем rate-limiter //
 app.use(requestLogger); // // подключаем логгер запросов до роутов //
 
 app.use(router); // подключаем роутеры //

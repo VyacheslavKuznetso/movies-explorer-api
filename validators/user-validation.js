@@ -15,13 +15,7 @@ const loginUserValidation = {
   }),
 };
 
-const userIdValidation = {
-  params: Joi.object().keys({
-    userId: Joi.string().length(24).hex().required(),
-  }),
-};
-
-const userMeValidation = {
+const updateUserMeValidation = {
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
@@ -31,6 +25,5 @@ const userMeValidation = {
 module.exports = {
   createUserValidation,
   loginUserValidation,
-  userIdValidation,
-  userMeValidation,
+  updateUserMeValidation,
 };
