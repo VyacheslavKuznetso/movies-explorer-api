@@ -11,7 +11,7 @@ const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./express-rate-limit/limiter');
 
-mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:4000/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:3000/bitfilmsdb');
 
 const app = express();
 app.use(helmet());
