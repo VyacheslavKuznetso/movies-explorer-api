@@ -7,6 +7,6 @@
 
 ## Ссылки на проект
 
-IP 158.160.62.139
+IP 51.250.95.4
 
 Backend https://api.rumovies.nomoredomainsmonster.ru
